@@ -43,6 +43,7 @@ fun main(args: Array<String>) {
                 }
             }
             else -> println("ERROR: Incorrect input")
+            //Test commit - delete me
         }
     }
 }
