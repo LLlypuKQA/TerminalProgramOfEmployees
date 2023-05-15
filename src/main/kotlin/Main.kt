@@ -4,12 +4,6 @@ fun main(args: Array<String>) {
         Menu(2, "Add employee"),
         Menu(3, "Delete employee")
     )
-    val listEmployee = mutableListOf<String>()
-    fun empl() {
-        for ((index, employee) in listEmployee.withIndex()){
-            println("${index + 1}. $employee")
-        }
-    }
 
     while (true) {
         println("MENU:")
@@ -18,8 +12,8 @@ fun main(args: Array<String>) {
         when (input) {
 
             1 -> {
-                empl()
-                if (listEmployee.isEmpty()) println("No Employees")
+                showListOfEmployees()
+                if (employeesList.isEmpty()) println("No Employees")
             }
 
             2 -> {
@@ -27,8 +21,8 @@ fun main(args: Array<String>) {
                 val addName = readlnOrNull().toString()
                 println("Add age: ")
                 val addAge = readlnOrNull().toString()
-                listEmployee.add(Employees(addName, addAge).toString())
-                empl()
+                employeesList.add(Employees(addName, addAge).toString())
+                showListOfEmployees()
             }
 
             3 -> {
@@ -36,14 +30,20 @@ fun main(args: Array<String>) {
                 val deleteEmployee = readlnOrNull()?.toInt()
                 if (deleteEmployee != null) {
                     val index = deleteEmployee - 1
-                    if (listEmployee.indices.contains(index)) {
-                        listEmployee.removeAt(index)
-                    }
-                    empl()
+                    if (employeesList.indices.contains(index)) {
+                        employeesList.removeAt(index)
+                    } else println("ERROR: Incorrect input")
+                    showListOfEmployees()
                 }
             }
             else -> println("ERROR: Incorrect input")
-            //Test commit - delete me
         }
+    }
+}
+
+val employeesList = mutableListOf<String>()
+fun showListOfEmployees() {
+    for ((index, employee) in employeesList.withIndex()){
+        println("${index + 1}. $employee")
     }
 }
